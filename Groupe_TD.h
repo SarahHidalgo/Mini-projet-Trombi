@@ -1,9 +1,9 @@
 #pragma once
 
 #include <string>
-#include <vector>;
-#include <fstream>;
-#include "Etudiants.h";
+#include <vector>
+#include <fstream>
+#include "Etudiants.h"
 
 using namespace std;
 

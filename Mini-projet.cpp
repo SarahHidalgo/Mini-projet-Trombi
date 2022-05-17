@@ -1,5 +1,8 @@
 // Mini-projet.cpp : Ce fichier contient la fonction 'main'. L'exécution du programme commence et se termine à cet endroit.
 //
+
+// GrA ou Groupe A : demander a la prof !!
+
 #include <sstream>
 #include <iostream>
 #include <vector>
@@ -9,15 +12,17 @@
 
 #include "Etudiants.h"
 #include "Groupe_TD.h"
-
+#include "FiseTSE.h"
 
 using namespace std;
 using namespace sf;
 
-void decoupageInfosEtudiants(string fichier) 
+
+
+void decoupageInfosEtudiants(string fichier, vector<string> numero, vector<string> username, vector<string> nom, vector<string> prenom, vector<string> groupe_TD, vector<string> image)
 {
 	// Récupération des données sur les étudiants du fichier 
-	vector<string> Numero{}, Username{}, Nom{}, Prenom{}, Groupe_TD{}, Fichier{};
+	vector<string> Nu{}, Us{}, No{}, Pr{}, Gr{}, Im{};
 	ifstream Trombi("fise1.csv", ios::in);  // on ouvre en lecture
 
 	if (!Trombi.is_open()) {
@@ -33,82 +38,77 @@ void decoupageInfosEtudiants(string fichier)
 			char delimiter2 = ';';
 			string mot;
 			getline(sstream, mot, delimiter2);
-			Numero.push_back(mot);
+			Nu.push_back(mot);
 			getline(sstream, mot, delimiter2);
-			Username.push_back(mot);
+			Us.push_back(mot);
 			getline(sstream, mot, delimiter2);
-			Nom.push_back(mot);
+			No.push_back(mot);
 			getline(sstream, mot, delimiter2);
-			Prenom.push_back(mot);
+			Pr.push_back(mot);
 			getline(sstream, mot, delimiter2);
-			Groupe_TD.push_back(mot);
+			Gr.push_back(mot);
 			getline(sstream, mot, delimiter2);
-			Fichier.push_back(mot);
+			Im.push_back(mot);
 		}
+		/*
+		numero = &Nu;
+		username = &Us;
+		nom = &No;
+		prenom = &Pr;
+		groupe_TD = &Gr;
+		image = &Im;
+		*/
+	}
+	for (const auto& str : Nu) {
+		cout << str << endl;;
+	}
+	for (const auto& str : Gr) {
+		cout << str << endl;;
+	}
+	
+}
 
-		// Affichage des données des étudiants mises dans des vecteurs
-		
-		for (const auto& str : Numero) {
-			cout << str << endl;;
+
+
+// Tri des élèves en fonction des groupe de TD ??
+
+void ajoutEtudiants(Groupe_TD groupA, Groupe_TD groupB, Groupe_TD groupC, Groupe_TD groupD, Groupe_TD groupE,vector<string> numero, vector<string> username, vector<string> nom, vector<string> prenom, vector<string> groupe_TD, vector<string> image)
+{
+	for (int i =1 ; i < numero.size(); i++)
+	{
+		Etudiant etu(nom[i], username[i], prenom[i], groupe_TD[i], image[i], stoi(numero[i]));
+		if (groupe_TD[i] == "A") 
+		{
+			groupA.ajouterMembre(&etu);
 		}
-		for (const auto& str : Groupe_TD) {
-			cout << str << endl;;
+		if (groupe_TD[i] == "B")
+		{
+			groupB.ajouterMembre(&etu);
 		}
+		if (groupe_TD[i] == "C")
+		{
+			groupC.ajouterMembre(&etu);
+		}
+		if (groupe_TD[i] == "D")
+		{
+			groupD.ajouterMembre(&etu);
+		}
+		if (groupe_TD[i] == "E")
+		{
+			groupE.ajouterMembre(&etu);
+		}
+		groupA.afficher();
+
 	}
 }
 
-void choixFise(string fichierFise) {
-	string choix, Fise, Groupe;
-	char delimiter = '-';
-	bool flag = true;
-	array <string,3> myList1 = { "FISE1", "FISE2", "FISE3"};
-	array <string, 5> myList2 = { "GrA", "GrB", "GrC","GrD","GrE"};
 
-	// Display les différentes filieres et groupe pour orienter l'utilisateur
-	cout << "---------------------------" << endl;
-	cout << " Filieres : " << endl;
-	cout << " FISE1 " << endl;
-	cout << " FISE2 " << endl;
-	cout << " FISE3 " << endl;
-	cout << "---------------------------" << endl;
-	cout << " Groupes : " << endl;
-	cout << " GrA " << endl;
-	cout << " GrB " << endl;
-	cout << " GrC " << endl;
-	cout << " GrD " << endl;
-	cout << " GrE " << endl;
-	cout << "---------------------------" << endl;
-
-	do {
-
-		cout << "Donnnez la filiere et le groupe de TD dont vous voulez faire l'appel (par exemple FISE2-GrA) : " << endl;
-		cin >> choix;
-		stringstream sstream(choix);
-		getline(sstream, Fise, delimiter);
-		cout << Fise << endl;
-		//const char* choixF = Fise.c_str(); // on transforme un string en const char*
-		getline(sstream, Groupe);
-		cout << Groupe << endl;
-		//const char* choixG = Groupe.c_str();
-		// Si Fise et Groupe font partie de myList(1 ou 2) alors l'utilisateur a rentré ce qui était demandé, on sort donc de la boucle
-		if ((find(begin(myList1), end(myList1), Fise) != end(myList1)) && (find(begin(myList2), end(myList2),Groupe) != end(myList2))) 
-		{
-			flag = false;
-		}
-		// Sinon on rentre de re rentre la filiere et le groupe
-		else
-		{
-			cout << "Veuillez reessayer, ecrivez la filiere et le groupe en suivant l'exemple donne ! " << endl;
-			cout << endl;
-		}
-	} while (flag);
-}
 
 
 int main()
 {
 	// Initialisation d'un étudiant
-	Etudiant etudiant("D", "De", "rr", "C", "png", 23);
+	Etudiant etudiant("Dupont", "De", "rr", "C", "png", 23);
 	etudiant.afficher();
 
 	// Initialisation d'un groupe de TD
@@ -119,14 +119,39 @@ int main()
 	groupe_C.afficher();
 
 	// Choix du fichier à ouvrir (Fise1, Fise2, Fise3)
-	string fichier = "fise1.csv"; // par défault on ouvre fise1
-	choixFise(fichier);
-	decoupageInfosEtudiants(fichier);
+	FiseTSE Fise_info;
+	Fise_info.choixFise();
 
-	// Tri des élèves en fonction des groupe de TD ??
+	//Verification des choix
+	cout << Fise_info.getNom() << endl;
+	cout << Fise_info.getLink() << endl;
+
+	cout << "FIN" << endl;
+
+	vector<string> num{}, user{}, name{}, pre{}, groupe{}, img{};
+	//decoupageInfosEtudiants(fichier, num, user, name, pre, groupe, img);
+
+	// Initialisation des 5 groupes de TD différents
+	Groupe_TD Groupe_A("Groupe-A");
+	Groupe_TD Groupe_B("Groupe-B");
+	Groupe_TD Groupe_C("Groupe-C");
+	Groupe_TD Groupe_D("Groupe-D");
+	Groupe_TD Groupe_E("Groupe-E");
+
+	//ajoutEtudiants(Groupe_A, Groupe_B, Groupe_C, Groupe_D, Groupe_E, num, user, name, pre, groupe, img);
 
 
+	// Affichage des données des étudiants mises dans des vecteurs
+	/*
+	for (const auto& str : num) {
+		cout << str << endl;;
+	}
+	for (const auto& str : groupe) {
+		cout << str << endl;;
+	}*/
 	
+
+
 	return 0;
 }
 	

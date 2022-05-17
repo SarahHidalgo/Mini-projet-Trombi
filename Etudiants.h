@@ -8,9 +8,9 @@ using namespace std;
 
 class Etudiant
 {
-	string Nom_, Username_, Prenom_, Groupe_TD_, Fichier_;
-	int Numero_;
+	string nom_, username_, prenom_, groupe_TD_, image_;
+	int numero_;
 public:
-	Etudiant(string nom = " ", string Username = " ", string Prenom = " ", string Groupe_TD = " ", string Fichier = " ", int Numero=0);
+	Etudiant(string nom = " ", string username = " ", string prenom = " ", string groupe_TD = " ", string image = " ", int numero=0);
 	void afficher();
 };
