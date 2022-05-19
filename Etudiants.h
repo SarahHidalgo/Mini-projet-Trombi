@@ -13,4 +13,6 @@ class Etudiant
 public:
 	Etudiant(string nom = " ", string username = " ", string prenom = " ", string groupe_TD = " ", string image = " ", int numero=0);
 	void afficher();
+	//void sauver(ofstream& ofs) const;
+	//void charger(ifstream& ifs);
 };

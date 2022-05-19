@@ -14,22 +14,74 @@ FiseTSE::FiseTSE(string nom_fise, string lien)
 {
 	nom_fichier_ = lien;
 	nom_fise_ = nom_fise;
-	
 }
-
 
 void FiseTSE::afficher()
 {
 	cout << "Filiere : " << nom_fise_ << " " <<endl;
 	cout << "Lien du fichier : " << nom_fichier_ << endl;
-
-
 }
 
+string FiseTSE::afficherInfosVecteurs(string nom_vecteur, int i)
+{
+	if (strcmp(nom_vecteur.c_str(), "nom_") == 0)
+	{
+		return nom_[i];
+	}
+	if (strcmp(nom_vecteur.c_str(), "username_") == 0)
+	{
+		return username_[i];
+	}
+	if (strcmp(nom_vecteur.c_str(), "prenom_") == 0)
+	{
+		return prenom_[i];
+	}
+	if (strcmp(nom_vecteur.c_str(), "groupe_TD_") == 0)
+	{
+		return groupe_TD_[i];
+	}
+	if (strcmp(nom_vecteur.c_str(), "numero_") == 0)
+	{
+		return numero_[i];
+	}
+	if (strcmp(nom_vecteur.c_str(), "image_") == 0)
+	{
+		return image_[i];
+	}
+}
 
-void FiseTSE :: decoupageInfosEtudiants(string fichier, vector<string> numero, vector<string> username, vector<string> nom, vector<string> prenom, vector<string> groupe_TD, vector<string> image)
+void FiseTSE::decoupageInfosEtudiants(string fichier)
+{
+	// Récupération des données sur les étudiants du fichier 
+	ifstream Trombi(fichier, ios::in);  // on ouvre en lecture
 
-
+	if (!Trombi.is_open()) {
+		cout << "Erreur d'ouverture" << endl;
+	}
+	else {
+		string ligne;
+		char delimiter1 = '\n';
+		while (getline(Trombi, ligne, delimiter1))
+		{
+			// cout << ligne << endl;
+			stringstream sstream(ligne);
+			char delimiter2 = ';';
+			string mot;
+			getline(sstream, mot, delimiter2);
+			numero_.push_back(mot);
+			getline(sstream, mot, delimiter2);
+			username_.push_back(mot);
+			getline(sstream, mot, delimiter2);
+			nom_.push_back(mot);
+			getline(sstream, mot, delimiter2);
+			prenom_.push_back(mot);
+			getline(sstream, mot, delimiter2);
+			groupe_TD_.push_back(mot);
+			getline(sstream, mot, delimiter2);
+			image_.push_back(mot);
+		}
+	}
+}
 
 void FiseTSE :: choixFise() {
 	string choix, Fise, Groupe;
@@ -75,6 +127,7 @@ void FiseTSE :: choixFise() {
 		}
 	} while (flag);
 
+	choix_groupe_ = Groupe;
 	nom_fise_ = Fise;
 	nom_fichier_ = Fise + ".csv";
 }

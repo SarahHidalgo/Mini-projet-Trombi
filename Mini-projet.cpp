@@ -18,92 +18,7 @@ using namespace std;
 using namespace sf;
 
 
-
-void decoupageInfosEtudiants(string fichier, vector<string> numero, vector<string> username, vector<string> nom, vector<string> prenom, vector<string> groupe_TD, vector<string> image)
-{
-	// Récupération des données sur les étudiants du fichier 
-	vector<string> Nu{}, Us{}, No{}, Pr{}, Gr{}, Im{};
-	ifstream Trombi("fise1.csv", ios::in);  // on ouvre en lecture
-
-	if (!Trombi.is_open()) {
-		cout << "Erreur d'ouverture" << endl;
-	}
-	else {
-		string ligne;
-		char delimiter1 = '\n';
-		while (getline(Trombi, ligne, delimiter1))
-		{
-			// cout << ligne << endl;
-			stringstream sstream(ligne);
-			char delimiter2 = ';';
-			string mot;
-			getline(sstream, mot, delimiter2);
-			Nu.push_back(mot);
-			getline(sstream, mot, delimiter2);
-			Us.push_back(mot);
-			getline(sstream, mot, delimiter2);
-			No.push_back(mot);
-			getline(sstream, mot, delimiter2);
-			Pr.push_back(mot);
-			getline(sstream, mot, delimiter2);
-			Gr.push_back(mot);
-			getline(sstream, mot, delimiter2);
-			Im.push_back(mot);
-		}
-		/*
-		numero = &Nu;
-		username = &Us;
-		nom = &No;
-		prenom = &Pr;
-		groupe_TD = &Gr;
-		image = &Im;
-		*/
-	}
-	for (const auto& str : Nu) {
-		cout << str << endl;;
-	}
-	for (const auto& str : Gr) {
-		cout << str << endl;;
-	}
-	
-}
-
-
-
-// Tri des élèves en fonction des groupe de TD ??
-
-void ajoutEtudiants(Groupe_TD groupA, Groupe_TD groupB, Groupe_TD groupC, Groupe_TD groupD, Groupe_TD groupE,vector<string> numero, vector<string> username, vector<string> nom, vector<string> prenom, vector<string> groupe_TD, vector<string> image)
-{
-	for (int i =1 ; i < numero.size(); i++)
-	{
-		Etudiant etu(nom[i], username[i], prenom[i], groupe_TD[i], image[i], stoi(numero[i]));
-		if (groupe_TD[i] == "A") 
-		{
-			groupA.ajouterMembre(&etu);
-		}
-		if (groupe_TD[i] == "B")
-		{
-			groupB.ajouterMembre(&etu);
-		}
-		if (groupe_TD[i] == "C")
-		{
-			groupC.ajouterMembre(&etu);
-		}
-		if (groupe_TD[i] == "D")
-		{
-			groupD.ajouterMembre(&etu);
-		}
-		if (groupe_TD[i] == "E")
-		{
-			groupE.ajouterMembre(&etu);
-		}
-		groupA.afficher();
-
-	}
-}
-
-
-
+/*
 
 int main()
 {
@@ -122,80 +37,36 @@ int main()
 	FiseTSE Fise_info;
 	Fise_info.choixFise();
 
-	//Verification des choix
+	//Verification des choix, affichage du nom et du fichier a ouvrir
 	cout << Fise_info.getNom() << endl;
 	cout << Fise_info.getLink() << endl;
+	cout << Fise_info.getChoixGroupe() << endl;
 
-	cout << "FIN" << endl;
-
-	vector<string> num{}, user{}, name{}, pre{}, groupe{}, img{};
-	//decoupageInfosEtudiants(fichier, num, user, name, pre, groupe, img);
+	// Découpage des infos du fichier
+	string lien_fichier;
+	lien_fichier = Fise_info.getLink();
+	Fise_info.decoupageInfosEtudiants(lien_fichier);
+	cout << Fise_info.afficherInfosVecteurs("nom_", 125) << endl; // test affichage du fichier image du rang 125
 
 	// Initialisation des 5 groupes de TD différents
-	Groupe_TD Groupe_A("Groupe-A");
-	Groupe_TD Groupe_B("Groupe-B");
-	Groupe_TD Groupe_C("Groupe-C");
-	Groupe_TD Groupe_D("Groupe-D");
-	Groupe_TD Groupe_E("Groupe-E");
+	Groupe_TD Groupe_A("A");
+	Groupe_TD Groupe_B("B");
+	Groupe_TD Groupe_C("C");
+	Groupe_TD Groupe_D("D");
+	Groupe_TD Groupe_E("E");
 
-	//ajoutEtudiants(Groupe_A, Groupe_B, Groupe_C, Groupe_D, Groupe_E, num, user, name, pre, groupe, img);
+	// Tri des etudiants dans les groupe de TD
+	Groupe_A.ajoutEtudiants(Fise_info);
+	Groupe_B.ajoutEtudiants(Fise_info);
+	Groupe_C.ajoutEtudiants(Fise_info);
+	Groupe_D.ajoutEtudiants(Fise_info);
+	Groupe_E.ajoutEtudiants(Fise_info);
+	Groupe_A.afficher(); // Affichage du groupe A
 
-
-	// Affichage des données des étudiants mises dans des vecteurs
-	/*
-	for (const auto& str : num) {
-		cout << str << endl;;
-	}
-	for (const auto& str : groupe) {
-		cout << str << endl;;
-	}*/
-	
-
+	cout << "FIN" << endl;
 
 	return 0;
 }
 	
 
-// Utilisation de SFML
-/*	string groupe;
-	cout << "Choisissez le groupe de TD" << endl;
-	cin >> groupe;
-
-	sf::Texture texture;
-	if (!texture.loadFromFile("marie.png"))
-	{
-		// erreur...
-	}
-	sf::Sprite sprite;
-	sprite.setTexture(texture);
-
-	// définit un triangle
-	sf::CircleShape triangle(80.f, 3);
-	// définit un carré
-	sf::CircleShape square(80.f, 4);
-	// définit un octogone
-	sf::CircleShape octagon(80.f, 8);
-	triangle.setTexture(&texture);
-	octagon.setTexture(&texture);
-
-	// Création de la fenêtre
-	sf::RenderWindow window(sf::VideoMode(800, 800), "FISE1");
-	// Boucle principale
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event)) {
-			// Demande de fermeture de la fenêtre
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
-		// On efface la fenêtre (en blanc)
-		window.clear(sf::Color::White);
-		// Affichage du sprite
-		window.draw(sprite);
-		window.draw(triangle);
-		window.draw(octagon);
-		// Mise à jour de la fenêtre
-		window.display();
-
-	}*/
+*/
