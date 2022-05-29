@@ -128,10 +128,10 @@ void Groupe_TD::afficherEcran(Groupe_TD groupe)
 
 					// Affichage des noms des étudiants
 					text.setString(groupe.getEtudiantNom(n));
-					text.setPosition(60 + j * 300, 350 + i * 450);
+					text.setPosition(20 + j * 300, 350 + i * 450);
 					app.draw(text);
 					text.setString(groupe.getEtudiantPrenom(n));
-					text.setPosition(80 + j * 300, 380 + i * 450);
+					text.setPosition(20 + j * 300, 380 + i * 450);
 					app.draw(text);
 					n++;
 				}

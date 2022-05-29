@@ -18,6 +18,8 @@
 using namespace std;
 using namespace sf;
 
+
+
 int main()
 {
 	// Choix du fichier à ouvrir (Fise1, Fise2, Fise3)
@@ -25,15 +27,16 @@ int main()
 	Fise_info.choixFise();
 
 	//Verification des choix, affichage du nom et du fichier a ouvrir
-	cout << Fise_info.getNom() << endl;
-	cout << Fise_info.getLink() << endl;
-	cout << Fise_info.getChoixGroupe() << endl;
+	string nom_fise = Fise_info.getNom();
+	string nom_groupe = Fise_info.getChoixGroupe(); // affichage de "GrC"
+	string lettre_gr;
+	lettre_gr = nom_groupe[2]; // Lalettre du groupe est conservé dans la variable lettre_gr
+
 
 	// Découpage des infos du fichier
 	string lien_fichier;
 	lien_fichier = Fise_info.getLink();
-	Fise_info.decoupageInfosEtudiants(lien_fichier);
-	cout << Fise_info.afficherInfosVecteurs("nom_", 125) << endl; // test affichage du fichier image du rang 125
+	Fise_info.decoupageInfosEtudiants(lien_fichier); // tri du fichier
 
 	// Initialisation des 5 groupes de TD différents
 	Groupe_TD Groupe_A("A");
@@ -48,11 +51,13 @@ int main()
 	Groupe_C.ajoutEtudiants(Fise_info);
 	Groupe_D.ajoutEtudiants(Fise_info);
 	Groupe_E.ajoutEtudiants(Fise_info);
-	Groupe_A.afficher(); // Affichage du groupe A
 
-	cout << "FIN" << endl;
 
 	Groupe_C.afficherEcran(Groupe_C);
 
+
+	cout << "FIN" << endl;
+
 	return 0;
 }
+	
