@@ -6,15 +6,15 @@
 
 using namespace std;
 
-class Etudiant
+class Etudiant 
 {
 	string nom_, username_, prenom_, groupe_TD_, image_;
 	int numero_;
 public:
 	Etudiant(string nom = " ", string username = " ", string prenom = " ", string groupe_TD = " ", string image = " ", int numero=0);
 	void afficher();
-	string getImage() { return image_; };
-	const string& getNomPrenom()const { return nom_ + " " + prenom_; };
-	//void sauver(ofstream& ofs) const;
-	//void charger(ifstream& ifs);
+	const string& getImg()const { return image_; };
+	const string& getNomPrenom()const { return (string)(nom_+" "+prenom_); };
+	void sauver(ofstream& ofs) const;
+	void charger(ifstream& ifs);
 };

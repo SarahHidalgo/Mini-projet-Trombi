@@ -1,13 +1,7 @@
-#include"iostream"
-#include<string>
-#include <cstdlib>
-#include <SFML/Graphics.hpp>
-#include"Etudiants.h"
-#include"Groupe_TD.h"
-#include"Portrait.h"
-using namespace std;
-using namespace sf;
-
+#include <string>
+#include <fstream>
+#include <iostream>
+#include "Etudiants.h"
 
 using namespace std;
 
@@ -29,4 +23,22 @@ void Etudiant::afficher()
 	cout << "Groupe de TD : " << groupe_TD_ << endl;
 	cout << "Fichier photo : " << image_ << endl;
 
+}
+
+void Etudiant::sauver(ofstream& ofs) const
+{
+	ofs << nom_ << " ";
+	ofs << username_ << " ";
+	ofs << prenom_ << " ";
+	ofs << groupe_TD_ << " ";
+	ofs << image_ << " ";
+	ofs << numero_ << endl;
+
+
+}
+void Etudiant::charger(ifstream& ifs)
+{
+	getline(ifs, nom_);
+	ifs >> username_ >> prenom_>> groupe_TD_>> image_>> numero_;
+	ifs.ignore(); // On ignore le séparateur \n
 }
