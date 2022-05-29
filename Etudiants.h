@@ -13,6 +13,8 @@ class Etudiant
 public:
 	Etudiant(string nom = " ", string username = " ", string prenom = " ", string groupe_TD = " ", string image = " ", int numero=0);
 	void afficher();
+	string getImage() { return image_; };
+	const string& getNomPrenom()const { return nom_ + " " + prenom_; };
 	//void sauver(ofstream& ofs) const;
 	//void charger(ifstream& ifs);
 };

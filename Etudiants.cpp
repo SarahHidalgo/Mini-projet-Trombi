@@ -1,7 +1,13 @@
-#include <string>
-#include <fstream>
-#include <iostream>
-#include "Etudiants.h"
+#include"iostream"
+#include<string>
+#include <cstdlib>
+#include <SFML/Graphics.hpp>
+#include"Etudiants.h"
+#include"Groupe_TD.h"
+#include"Portrait.h"
+using namespace std;
+using namespace sf;
+
 
 using namespace std;
 

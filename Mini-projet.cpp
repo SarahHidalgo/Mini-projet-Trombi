@@ -13,26 +13,13 @@
 #include "Etudiants.h"
 #include "Groupe_TD.h"
 #include "FiseTSE.h"
+#include"Portrait.h"
 
 using namespace std;
 using namespace sf;
 
-
-/*
-
 int main()
 {
-	// Initialisation d'un étudiant
-	Etudiant etudiant("Dupont", "De", "rr", "C", "png", 23);
-	etudiant.afficher();
-
-	// Initialisation d'un groupe de TD
-	Groupe_TD groupe_C("Groupe C");
-	groupe_C.ajouterMembre(new Etudiant("Dupont", "De1", "rr1", "C", "png1", 23));
-	groupe_C.ajouterMembre(new Etudiant("Duchmol", "De2", "rr2", "C", "png2", 24));
-	groupe_C.ajouterMembre(new Etudiant("Toto", "De3", "rr3", "C", "png3", 25));
-	groupe_C.afficher();
-
 	// Choix du fichier à ouvrir (Fise1, Fise2, Fise3)
 	FiseTSE Fise_info;
 	Fise_info.choixFise();
@@ -65,8 +52,7 @@ int main()
 
 	cout << "FIN" << endl;
 
+	Groupe_C.afficherEcran(Groupe_C);
+
 	return 0;
 }
-	
-
-*/

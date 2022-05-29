@@ -9,7 +9,6 @@ Portrait::Portrait()
 	nom_ = "img";
 }
 
-
 void Portrait::afficherImage(RenderWindow& window, int x, int y)
 {
 	Texture texture;

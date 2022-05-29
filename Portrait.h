@@ -2,6 +2,7 @@
 
 #include<string>
 #include <SFML/Graphics.hpp>
+#include"Groupe_TD.h"
 using namespace sf;
 using namespace std;
 
