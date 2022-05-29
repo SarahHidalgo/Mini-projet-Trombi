@@ -23,7 +23,7 @@ void Groupe_TD::ajouterMembre(Etudiant* e)
 	tabMembre_.push_back(e);
 }
 
-void Groupe_TD::afficher() 
+void Groupe_TD::afficher()
 {
 	cout << endl;
 	cout << "-----------------------" << endl;
@@ -51,8 +51,8 @@ void Groupe_TD::ajoutEtudiants(FiseTSE Fise_info)
 		groupe_eleve = Fise_info.afficherInfosVecteurs("groupe_TD_", i);
 		numero_eleve = Fise_info.afficherInfosVecteurs("numero_", i);
 		image_eleve = Fise_info.afficherInfosVecteurs("image_", i);
-		
-		if (strcmp(groupe_eleve.c_str(),nom_TD_.c_str())== 0)
+
+		if (strcmp(groupe_eleve.c_str(), nom_TD_.c_str()) == 0)
 		{
 			tabMembre_.push_back(new Etudiant(nom_eleve, username_eleve, prenom_eleve, groupe_eleve, image_eleve, stoi(numero_eleve)));
 		}
@@ -102,7 +102,7 @@ void Groupe_TD::afficherEcran(Groupe_TD groupe)
 				app.close();
 		}
 
-		app.clear(Color :: White);
+		app.clear(Color::White);
 
 		int Nmax = groupe.getSize();
 		int n = 0;
@@ -111,8 +111,9 @@ void Groupe_TD::afficherEcran(Groupe_TD groupe)
 		Text text;
 		Font font;
 		font.loadFromFile("Quicksand-Regular.otf");
+		text.setString(L"éèàçÉëêî");
 		text.setFont(font);
-		text.setCharacterSize(30);
+		text.setCharacterSize(24);
 		text.setFillColor(Color::Black);
 
 		for (int i = 0; i < 5; i++)
@@ -123,10 +124,14 @@ void Groupe_TD::afficherEcran(Groupe_TD groupe)
 				{
 					// Affichage photos des étudiants
 					portrait.SetNom(groupe.getEtudiantImage(n));
-					portrait.afficherImage(app, 20 + j * 275, 20 + i * 400);
+					portrait.afficherImage(app, 20 + j * 300, 20 + i * 450);
+
 					// Affichage des noms des étudiants
-					text.setString("DD");
-					text.setPosition(60 + j * 275, 340 + i * 400);
+					text.setString(groupe.getEtudiantNom(n));
+					text.setPosition(60 + j * 300, 350 + i * 450);
+					app.draw(text);
+					text.setString(groupe.getEtudiantPrenom(n));
+					text.setPosition(80 + j * 300, 380 + i * 450);
 					app.draw(text);
 					n++;
 				}
