@@ -36,9 +36,10 @@ void Etudiant::sauver(ofstream& ofs) const
 
 
 }
+
 void Etudiant::charger(ifstream& ifs)
 {
 	getline(ifs, nom_);
-	ifs >> username_ >> prenom_>> groupe_TD_>> image_>> numero_;
+	ifs >> username_ >> prenom_ >> groupe_TD_ >> image_ >> numero_;
 	ifs.ignore(); // On ignore le séparateur \n
 }
