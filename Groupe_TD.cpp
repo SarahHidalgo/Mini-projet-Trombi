@@ -1,13 +1,8 @@
-#include"iostream"
-#include<string>
-#include <cstdlib>
-#include <SFML/Graphics.hpp>
-#include"Etudiants.h"
-#include"Groupe_TD.h"
-#include"Portrait.h"
-using namespace std;
-using namespace sf;
-
+#include <string>
+#include <fstream>
+#include <iostream>
+#include "Groupe_TD.h"
+#include "Portrait.h"
 
 using namespace std;
 
@@ -64,6 +59,33 @@ void Groupe_TD::ajoutEtudiants(FiseTSE Fise_info)
 	}
 }
 
+void Groupe_TD::sauver(ofstream& ofs) const
+{
+	ofs << nom_TD_ << endl;
+	ofs << tabMembre_.size() << endl;
+	for (int i = 0; i < (int)tabMembre_.size(); i++)
+		tabMembre_[i]->sauver(ofs);
+}
+
+void Groupe_TD::charger(ifstream& ifs)
+{
+	getline(ifs, nom_TD_);
+	// Suppression des membres existants
+	for (int i = 0; i < (int)tabMembre_.size(); i++)
+		delete tabMembre_[i];
+	tabMembre_.clear();
+	// Lecture des membres à partir du fichier
+	size_t nb;
+	ifs >> nb;
+	ifs.ignore();
+	for (int i = 0; i < (int)nb; i++)
+	{
+		Etudiant* e = new Etudiant;
+		e->charger(ifs);
+		ajouterMembre(e);
+	}
+}
+
 void Groupe_TD::afficherEcran(Groupe_TD groupe)
 {
 	RenderWindow app(VideoMode(1920, 1080), groupe.getNom());
@@ -80,7 +102,7 @@ void Groupe_TD::afficherEcran(Groupe_TD groupe)
 				app.close();
 		}
 
-		app.clear();
+		app.clear(Color :: White);
 
 		int Nmax = groupe.getSize();
 		int n = 0;
@@ -88,22 +110,23 @@ void Groupe_TD::afficherEcran(Groupe_TD groupe)
 		Portrait portrait;
 		Text text;
 		Font font;
+		font.loadFromFile("Quicksand-Regular.otf");
 		text.setFont(font);
-		text.setCharacterSize(300);
-		text.setFillColor(Color::White);
+		text.setCharacterSize(30);
+		text.setFillColor(Color::Black);
 
 		for (int i = 0; i < 5; i++)
 		{
-			for(int j=0;j<6;j++)
+			for (int j = 0; j < 6; j++)
 			{
-				if (6*i+j+1<Nmax)
+				if (6 * i + j + 1 < Nmax)
 				{
 					// Affichage photos des étudiants
 					portrait.SetNom(groupe.getEtudiantImage(n));
 					portrait.afficherImage(app, 20 + j * 275, 20 + i * 400);
 					// Affichage des noms des étudiants
-					text.setString(groupe.getEtudiantNomPrenom(n));
-					text.setPosition(60 + j * 275, 450 + i * 400);
+					text.setString("DD");
+					text.setPosition(60 + j * 275, 340 + i * 400);
 					app.draw(text);
 					n++;
 				}
