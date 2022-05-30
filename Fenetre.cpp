@@ -38,9 +38,48 @@ void Fenetre::afficherFenetre(Groupe_TD groupe, Portrait portrait)
 {
 	RenderWindow app(VideoMode(1920, 1080), getNom());
 
+	int Nmax = groupe.getSize(); // nombre d'étudiants dans le groupe
+	int nb = 0; // on part de l'étudiant 0
+
+	app.clear(Color::White);
+
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 6; j++)
+		{
+			// Affichage photos des étudiants
+			portrait.SetNom(groupe.getEtudiantImage(nb));
+			portrait.afficherImage(app, 150 + j * 270, 100 + i * 450, false);
+
+			// Affichage des noms des étudiants
+			portrait.afficherText(groupe.getEtudiantNom(nb), groupe.getEtudiantPrenom(nb), app, 150 + j * 270, 430 + i * 450);
+
+			nb++; // on passe à l'étudiant suivant en incrémentant l'entier n
+		}
+	}
+
+	Portrait portraitFleche;
+	// On place les flèches de navigation
+	portraitFleche.SetNom("fleche_droite.png");
+	portraitFleche.afficherImage(app, 1850, 490, true);
+	//portraitFleche.SetNom("fleche_gauche.png");
+	//portraitFleche.afficherImage(app, 20, 490, true);
+
+	app.display();
+
+	int nb_page = 1;
+	int nb_restant;
+	nb_restant = Nmax - nb;
+	int current_nb = 0;
+
 	while (app.isOpen())
 	{
+		Portrait portraitText;
+		string presence = "p.png";
+
+		vector <int> etudiants_present;
 		Event event;
+
 		// Affichage de la fenêtre à l'écran
 		while (app.pollEvent(event))
 		{
@@ -50,75 +89,81 @@ void Fenetre::afficherFenetre(Groupe_TD groupe, Portrait portrait)
 			// Appui sur le bouton gauche
 			if ((event.type == sf::Event::MouseButtonPressed) && (event.mouseButton.button == sf::Mouse::Left))
 			{
-				bool present;
-				Vector2i localPosition = sf::Mouse::getPosition(app);
-				for (int i = 0; i < 5; i++)
+				bool present = false;
+				Vector2i localPosition = Mouse::getPosition(app);
+
+				for (int i = 0; i < 2; i++)
 				{
 					for (int j = 0; j < 6; j++)
 					{
 						// Si clique sur un étudiant
-						if ((localPosition.y >= (20 + j * 300) && localPosition.y<=(260 + j * 300)) && (localPosition.x>= (20 + i * 450) && localPosition.x <= (360 + i * 450)))
+						if ((localPosition.x >= (150 + j * 270) && localPosition.x <= (390 + j * 300)) && (localPosition.y >= (100 + i * 450) && localPosition.y <= (440 + i * 450)))
 						{
-							portrait.afficherText("Présent", "", app, 50 + j * 300, 380 + i * 450);	
-							cout << "Present" << endl;
-						}
-						else {
-							present=false ;
+							Portrait portraitText;
+							portraitText.SetNom(presence);
+							portraitText.afficherImage(app, 150 + j * 270, 100 + i * 450, true);
 						}
 						// Si clique sur la fleche
 					}
 				}
-			}
-		}
-		app.clear(Color::White);
-
-		int Nmax = groupe.getSize(); // nombre d'étudiants dans le groupe
-		int nb = 0; // on part de l'étudiant 0
-
-		for (int i = 0; i < 2; i++)
-		{
-			for (int j = 0; j < 6; j++)
-			{
-				// Affichage photos des étudiants
-				portrait.SetNom(groupe.getEtudiantImage(nb));
-				portrait.afficherImage(app, 150 + j * 270, 100 + i * 450, false);
-
-				// Affichage des noms des étudiants
-				portrait.afficherText(groupe.getEtudiantNom(nb), groupe.getEtudiantPrenom(nb), app, 150 + j * 270, 430 + i * 450);
-
-				nb++; // on passe à l'étudiant suivant en incrémentant l'entier n
-
-			}
-		}
-
-		/*
-		for (int i = 0; i < 5; i++)
-		{
-			for (int j = 0; j < 6; j++)
-			{
-				if (6 * i + j + 1 < Nmax) // si on a pas atteint le nb d'étdiants du TD on affiche un étudiant
+				if (localPosition.x >= (1750)) // Clique sur la flèche de droite ( partie droite de la fenetre)
 				{
-					// Affichage photos des étudiants
-					portrait.SetNom(groupe.getEtudiantImage(nb));
-					portrait.afficherImage(app, 20 + j * 300, 20 + i * 450, false);
+					app.clear(Color::White);
+					nb_page = 2;
 
-					// Affichage des noms des étudiants
-					portrait.afficherText(groupe.getEtudiantNom(nb), groupe.getEtudiantPrenom(nb), app, 20 + j * 300, 350 + i * 450);
+					portraitFleche.SetNom("fleche_gauche.png");
+					portraitFleche.afficherImage(app, 20, 490, true);
 
-					// on passe à l'étudiant suivant en incrémentant l'entier n
-					nb++;
+					while (nb_restant >= 0 && current_nb<12)
+					{
+						for (int i = 0; i < 2; i++)
+						{
+							for (int j = 0; j < 6; j++)
+							{
+								// Affichage photos des étudiants
+								portrait.SetNom(groupe.getEtudiantImage(nb));
+								portrait.afficherImage(app, 150 + j * 270, 100 + i * 450, false);
+
+								// Affichage des noms des étudiants
+								portrait.afficherText(groupe.getEtudiantNom(nb), groupe.getEtudiantPrenom(nb), app, 150 + j * 270, 430 + i * 450);
+								current_nb++;
+								nb++; // on passe à l'étudiant suivant en incrémentant l'entier nb
+								nb_restant = Nmax - nb;
+							}
+						}
+					}
+					// s'il reste des éleves on affiche la fleche de droite 
+					if (nb_restant != 0)
+					{
+						portraitFleche.SetNom("fleche_droite.png");
+						portraitFleche.afficherImage(app, 1850, 490, true);
+					}
+					app.display();
+					
 				}
 			}
-		}*/
-
-		Portrait portraitbis;
-		// On place les flèches de navigation
-		portraitbis.SetNom("fleche_droite.png");
-		portraitbis.afficherImage(app, 1850, 490, true);
-		portraitbis.SetNom("fleche_gauche.png");
-		portraitbis.afficherImage(app, 20, 490, true);
-
-		app.display();
+			//portrait.afficherPresence(app, 150 + j * 270, 100 + i * 450, presence);
+		}
 	}
-
 }
+
+
+/*
+for (int i = 0; i < 5; i++)
+{
+	for (int j = 0; j < 6; j++)
+	{
+		if (6 * i + j + 1 < Nmax) // si on a pas atteint le nb d'étdiants du TD on affiche un étudiant
+		{
+			// Affichage photos des étudiants
+			portrait.SetNom(groupe.getEtudiantImage(nb));
+			portrait.afficherImage(app, 20 + j * 300, 20 + i * 450, false);
+
+			// Affichage des noms des étudiants
+			portrait.afficherText(groupe.getEtudiantNom(nb), groupe.getEtudiantPrenom(nb), app, 20 + j * 300, 350 + i * 450);
+
+			// on passe à l'étudiant suivant en incrémentant l'entier n
+			nb++;
+		}
+	}
+}*/
