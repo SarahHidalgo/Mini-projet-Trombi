@@ -20,7 +20,7 @@ void Portrait::afficherImage(RenderWindow& window, int x, int y, bool fleche)
 		cout << "erreur" << endl;
 	}
 	sprite_.setTexture(texture);
-	if (fleche==true)
+	if (fleche == true)
 		sprite_.setTextureRect(IntRect(0, 0, 50, 50)); // permet de redimmensionner le sprite pour les flèches qui sont plus petites
 	sprite_.setPosition(x, y);
 	window.draw(sprite_);

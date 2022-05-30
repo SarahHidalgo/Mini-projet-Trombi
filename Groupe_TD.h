@@ -27,8 +27,6 @@ public:
 	string getEtudiantImage(int i) { return tabMembre_[i]->getImage(); };
 	string getEtudiantNom(int i) { return tabMembre_[i]->getNom(); };
 	string getEtudiantPrenom(int i) { return tabMembre_[i]->getPrenom(); };
-	//Etudiant getEtudiant(int i) { return *tabMembre_[i]; };
-	void afficherEcran(Groupe_TD);
 };
 
 

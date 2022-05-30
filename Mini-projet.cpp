@@ -1,7 +1,4 @@
 // Mini-projet.cpp : Ce fichier contient la fonction 'main'. L'exécution du programme commence et se termine à cet endroit.
-//
-
-// GrA ou Groupe A : demander a la prof !!
 
 #include <sstream>
 #include <iostream>
@@ -13,11 +10,11 @@
 #include "Etudiants.h"
 #include "Groupe_TD.h"
 #include "FiseTSE.h"
-#include"Portrait.h"
+#include "Portrait.h"
+#include "Fenetre.h"
 
 using namespace std;
 using namespace sf;
-
 
 
 int main()
@@ -27,15 +24,14 @@ int main()
 	Fise_info.choixFise();
 
 	//Verification des choix, affichage du nom et du fichier a ouvrir
-	string nom_fise = Fise_info.getNom();
-	string nom_groupe = Fise_info.getChoixGroupe(); // affichage de "GrC"
+	string nom_fise = Fise_info.getNom(); // stockage du nom de la fise dans nom_fise
+	string nom_groupe = Fise_info.getChoixGroupe(); // stockage du nom du groupe ("GrC") dans nom_groupe
 	string lettre_gr;
-	lettre_gr = nom_groupe[2]; // Lalettre du groupe est conservé dans la variable lettre_gr
-
+	lettre_gr = nom_groupe[2]; // La lettre du groupe est conservé dans la variable lettre_gr
 
 	// Découpage des infos du fichier
 	string lien_fichier;
-	lien_fichier = Fise_info.getLink();
+	lien_fichier = Fise_info.getLink(); // stockage du fichier .csv dans la variable lien_fichier
 	Fise_info.decoupageInfosEtudiants(lien_fichier); // tri du fichier
 
 	// Initialisation des 5 groupes de TD différents
@@ -52,8 +48,10 @@ int main()
 	Groupe_D.ajoutEtudiants(Fise_info);
 	Groupe_E.ajoutEtudiants(Fise_info);
 
-
-	Groupe_C.afficherEcran(Groupe_C);
+	Portrait portrait;
+	Fenetre fenetre(lettre_gr);
+	// affichage du groupe de TD entrer par l'utilisateur
+	fenetre.afficherFenetreGroupe(portrait, lettre_gr, Groupe_A, Groupe_B, Groupe_C, Groupe_D, Groupe_E);
 
 
 	cout << "FIN" << endl;
