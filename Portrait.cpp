@@ -1,4 +1,6 @@
 #include"Portrait.h"
+#include "Groupe_TD.h"
+
 #include<string>
 #include<iostream>
 #include <SFML/Graphics.hpp>
@@ -20,4 +22,22 @@ void Portrait::afficherImage(RenderWindow& window, int x, int y)
 	sprite_.setTexture(texture);
 	sprite_.setPosition(x, y);
 	window.draw(sprite_);
+}
+
+// Affichage du nom et prenom en dessous de la photo
+void Portrait::afficherText(string prenom, string nom, RenderWindow& window, int x, int y)
+{
+	Text text;
+	Font font;
+	font.loadFromFile("Quicksand-Regular.otf");
+	text.setString(L"йиаз…лко");
+	text.setFont(font);
+	text.setCharacterSize(24);
+	text.setFillColor(Color::Black);
+	text.setString(nom); // ecriture du nom
+	text.setPosition(x,y); // position du nom
+	window.draw(text);
+	text.setString(prenom); //ecriture du prenom
+	text.setPosition(x,y+30); // positionnement du prenom
+	window.draw(text);
 }

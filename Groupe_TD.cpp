@@ -104,17 +104,10 @@ void Groupe_TD::afficherEcran(Groupe_TD groupe)
 
 		app.clear(Color::White);
 
-		int Nmax = groupe.getSize();
-		int n = 0;
+		int Nmax = groupe.getSize(); // nombre d'Ètudiants dans le groupe
+		int n = 0; // on part de l'Ètudiant 0
 
 		Portrait portrait;
-		Text text;
-		Font font;
-		font.loadFromFile("Quicksand-Regular.otf");
-		text.setString(L"ÈË‡Á…ÎÍÓ");
-		text.setFont(font);
-		text.setCharacterSize(24);
-		text.setFillColor(Color::Black);
 
 		for (int i = 0; i < 5; i++)
 		{
@@ -127,13 +120,9 @@ void Groupe_TD::afficherEcran(Groupe_TD groupe)
 					portrait.afficherImage(app, 20 + j * 300, 20 + i * 450);
 
 					// Affichage des noms des Ètudiants
-					text.setString(groupe.getEtudiantNom(n));
-					text.setPosition(20 + j * 300, 350 + i * 450);
-					app.draw(text);
-					text.setString(groupe.getEtudiantPrenom(n));
-					text.setPosition(20 + j * 300, 380 + i * 450);
-					app.draw(text);
-					n++;
+					portrait.afficherText(groupe.getEtudiantNom(n), groupe.getEtudiantPrenom(n), app, 20 + j * 300, 350 + i * 450);
+					
+					n++; // on passe ‡ l'Ètudiant suivant en incrÈmentant l'entier n
 				}
 			}
 		}
@@ -141,3 +130,4 @@ void Groupe_TD::afficherEcran(Groupe_TD groupe)
 		app.display();
 	}
 }
+
