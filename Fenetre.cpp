@@ -42,6 +42,11 @@ void Fenetre::afficherFenetre(Groupe_TD groupe, Portrait portrait)
 	int nb = 0; // on part de l'étudiant 0
 
 	app.clear(Color::White);
+	// On définit par défault le status d'absent aux élèves
+	string presence = "a.png";
+	Portrait portraitText;
+	portraitText.SetNom(presence);
+
 
 	for (int i = 0; i < 2; i++)
 	{
@@ -55,15 +60,21 @@ void Fenetre::afficherFenetre(Groupe_TD groupe, Portrait portrait)
 			portrait.afficherText(groupe.getEtudiantNom(nb), groupe.getEtudiantPrenom(nb), app, 150 + j * 270, 430 + i * 450);
 
 			nb++; // on passe à l'étudiant suivant en incrémentant l'entier n
+			portraitText.afficherImage(app, 150 + j * 270, 100 + i * 450, true);
 		}
 	}
 
-	Portrait portraitFleche;
+
 	// On place les flèches de navigation
+	Portrait portraitFleche;
 	portraitFleche.SetNom("fleche_droite.png");
 	portraitFleche.afficherImage(app, 1850, 490, true);
 	//portraitFleche.SetNom("fleche_gauche.png");
 	//portraitFleche.afficherImage(app, 20, 490, true);
+
+
+
+
 
 	app.display();
 
@@ -74,9 +85,6 @@ void Fenetre::afficherFenetre(Groupe_TD groupe, Portrait portrait)
 
 	while (app.isOpen())
 	{
-		Portrait portraitText;
-		string presence = "p.png";
-
 		vector <int> etudiants_present;
 		Event event;
 
@@ -87,38 +95,25 @@ void Fenetre::afficherFenetre(Groupe_TD groupe, Portrait portrait)
 			if (event.type == Event::Closed)
 				app.close();
 			// Appui sur le bouton gauche
-			if ((event.type == sf::Event::MouseButtonPressed) && (event.mouseButton.button == sf::Mouse::Left))
+			if ((event.type == Event::MouseButtonPressed) && (event.mouseButton.button == Mouse::Left))
 			{
-				bool present = false;
 				Vector2i localPosition = Mouse::getPosition(app);
 
-				for (int i = 0; i < 2; i++)
-				{
-					for (int j = 0; j < 6; j++)
-					{
-						// Si clique sur un étudiant
-						if ((localPosition.x >= (150 + j * 270) && localPosition.x <= (390 + j * 300)) && (localPosition.y >= (100 + i * 450) && localPosition.y <= (440 + i * 450)))
-						{
-							Portrait portraitText;
-							portraitText.SetNom(presence);
-							portraitText.afficherImage(app, 150 + j * 270, 100 + i * 450, true);
-						}
-						// Si clique sur la fleche
-					}
-				}
+				// Navigation 
 				if (localPosition.x >= (1750)) // Clique sur la flèche de droite ( partie droite de la fenetre)
 				{
 					app.clear(Color::White);
-					nb_page = 2;
 
 					portraitFleche.SetNom("fleche_gauche.png");
 					portraitFleche.afficherImage(app, 20, 490, true);
 
-					while (nb_restant >= 0 && current_nb<12)
+					//while (nb_restant >= 0 && current_nb<12)
+					
+					for (int i = 0; i < 2; i++)
 					{
-						for (int i = 0; i < 2; i++)
+						for (int j = 0; j < 6; j++)
 						{
-							for (int j = 0; j < 6; j++)
+							if (nb_restant >= 0 && current_nb < 12 && nb<25)
 							{
 								// Affichage photos des étudiants
 								portrait.SetNom(groupe.getEtudiantImage(nb));
@@ -126,10 +121,14 @@ void Fenetre::afficherFenetre(Groupe_TD groupe, Portrait portrait)
 
 								// Affichage des noms des étudiants
 								portrait.afficherText(groupe.getEtudiantNom(nb), groupe.getEtudiantPrenom(nb), app, 150 + j * 270, 430 + i * 450);
-								current_nb++;
+								
+								portraitText.afficherImage(app, 150 + j * 270, 100 + i * 450, true);
+
+								current_nb++; // numéro de l'étudiant sur la page courante
 								nb++; // on passe à l'étudiant suivant en incrémentant l'entier nb
 								nb_restant = Nmax - nb;
 							}
+								
 						}
 					}
 					// s'il reste des éleves on affiche la fleche de droite 
@@ -141,8 +140,31 @@ void Fenetre::afficherFenetre(Groupe_TD groupe, Portrait portrait)
 					app.display();
 					
 				}
+				current_nb = 0;
+
+
+
+				bool present = false;
+				// Affichage de la présence des eleves
+				for (int i = 0; i < 2; i++)
+				{
+					for (int j = 0; j < 6; j++)
+					{
+						// Si clique sur un étudiant
+						if ((localPosition.x >= (150 + j * 270) && localPosition.x <= (390 + j * 300)) && (localPosition.y >= (100 + i * 450) && localPosition.y <= (440 + i * 450)))
+						{
+							if (present)
+							{
+								//portraitText.SetNom("p.png");
+								//portraitText.
+							}
+							//portraitText.SetNom(presence);
+							//portraitText.afficherImage(app, 150 + j * 270, 100 + i * 450, true);
+							//app.display();
+						}
+					}
+				}
 			}
-			//portrait.afficherPresence(app, 150 + j * 270, 100 + i * 450, presence);
 		}
 	}
 }
