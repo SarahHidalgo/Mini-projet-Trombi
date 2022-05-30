@@ -1,9 +1,7 @@
 #pragma once
-#pragma once
 
 #include<string>
 #include <SFML/Graphics.hpp>
-
 #include "Groupe_TD.h"
 #include "Etudiants.h"
 
@@ -18,7 +16,6 @@ class Portrait
 public:
 	Portrait();
 	void SetNom(string dodo) { nom_ = dodo; };
-	void afficherImage(RenderWindow&, int position_x, int position_y);
+	void afficherImage(RenderWindow&, int position_x, int position_y, bool fleche);
 	void afficherText(string prenom, string nom, RenderWindow&, int x, int y);
-
 };

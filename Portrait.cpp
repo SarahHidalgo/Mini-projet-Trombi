@@ -11,7 +11,7 @@ Portrait::Portrait()
 	nom_ = "img";
 }
 
-void Portrait::afficherImage(RenderWindow& window, int x, int y)
+void Portrait::afficherImage(RenderWindow& window, int x, int y, bool fleche)
 {
 	Texture texture;
 
@@ -20,6 +20,8 @@ void Portrait::afficherImage(RenderWindow& window, int x, int y)
 		cout << "erreur" << endl;
 	}
 	sprite_.setTexture(texture);
+	if (fleche==true)
+		sprite_.setTextureRect(IntRect(0, 0, 50, 50)); // permet de redimmensionner le sprite pour les flèches qui sont plus petites
 	sprite_.setPosition(x, y);
 	window.draw(sprite_);
 }
@@ -35,9 +37,9 @@ void Portrait::afficherText(string prenom, string nom, RenderWindow& window, int
 	text.setCharacterSize(24);
 	text.setFillColor(Color::Black);
 	text.setString(nom); // ecriture du nom
-	text.setPosition(x,y); // position du nom
+	text.setPosition(x, y); // position du nom
 	window.draw(text);
 	text.setString(prenom); //ecriture du prenom
-	text.setPosition(x,y+30); // positionnement du prenom
+	text.setPosition(x, y + 30); // positionnement du prenom
 	window.draw(text);
 }
