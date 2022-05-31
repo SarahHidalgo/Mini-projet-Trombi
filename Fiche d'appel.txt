@@ -1,0 +1,177 @@
+Groupe : C
+25 élèves 
+-------------------
+AUFFRET Benoît
+Username : auffret.benoit
+Groupe : C
+Lien de l'image : img-007.png
+Numéro de l'étudiant : 7
+--> PRESENT 
+-------------------
+BACCOUCHE Mehdi
+Username : baccouche.mehdi
+Groupe : C
+Lien de l'image : img-009.png
+Numéro de l'étudiant : 9
+--> PRESENT 
+-------------------
+BAROLLET Sam
+Username : barollet.sam
+Groupe : C
+Lien de l'image : img-012.png
+Numéro de l'étudiant : 12
+--> PRESENT 
+-------------------
+BOUTEILLE Kylian
+Username : bouteille.kylian
+Groupe : C
+Lien de l'image : img-023.png
+Numéro de l'étudiant : 23
+--> PRESENT 
+-------------------
+CULLERON Antoine
+Username : culleron.antoine
+Groupe : C
+Lien de l'image : img-036.png
+Numéro de l'étudiant : 35
+--> ABSENT
+-------------------
+DARWANE Sami
+Username : darwane.sami
+Groupe : C
+Lien de l'image : img-037.png
+Numéro de l'étudiant : 36
+--> ABSENT
+-------------------
+DAURIAT Clément
+Username : dauriat.clement
+Groupe : C
+Lien de l'image : img-038.png
+Numéro de l'étudiant : 37
+--> ABSENT
+-------------------
+DEGLISE Lucas
+Username : deglise.lucas
+Groupe : C
+Lien de l'image : img-042.png
+Numéro de l'étudiant : 41
+--> ABSENT
+-------------------
+DESCOS Mathieu
+Username : descos.mathieu
+Groupe : C
+Lien de l'image : img-043.png
+Numéro de l'étudiant : 42
+--> ABSENT
+-------------------
+DESVIGNES-NOUVEL Alexi
+Username : desvignes-nouvel.alexi
+Groupe : C
+Lien de l'image : img-044.png
+Numéro de l'étudiant : 43
+--> ABSENT
+-------------------
+FROUTÉ Marie
+Username : froute.marie
+Groupe : C
+Lien de l'image : img-055.png
+Numéro de l'étudiant : 54
+--> ABSENT
+-------------------
+GILLES Valentine
+Username : gilles.valentine
+Groupe : C
+Lien de l'image : img-059.png
+Numéro de l'étudiant : 58
+--> ABSENT
+-------------------
+HIDALGO Sarah
+Username : hidalgo.sarah
+Groupe : C
+Lien de l'image : img-061.png
+Numéro de l'étudiant : 60
+--> PRESENT 
+-------------------
+JAOUI Ilan
+Username : jaoui.ilan
+Groupe : C
+Lien de l'image : img-064.png
+Numéro de l'étudiant : 62
+--> PRESENT 
+-------------------
+LEMIERE Alban
+Username : lemiere.alban
+Groupe : C
+Lien de l'image : img-074.png
+Numéro de l'étudiant : 71
+--> PRESENT 
+-------------------
+LEVY Aurélien
+Username : levy.aurelien
+Groupe : C
+Lien de l'image : img-076.png
+Numéro de l'étudiant : 73
+--> ABSENT
+-------------------
+LOURDEL Emilie
+Username : lourdel.emilie
+Groupe : C
+Lien de l'image : img-079.png
+Numéro de l'étudiant : 76
+--> ABSENT
+-------------------
+METEREAU Mathis
+Username : metereau.mathis
+Groupe : C
+Lien de l'image : img-083.png
+Numéro de l'étudiant : 80
+--> ABSENT
+-------------------
+NEEL Jeffrey
+Username : neel.jeffrey
+Groupe : C
+Lien de l'image : img-089.png
+Numéro de l'étudiant : 86
+--> PRESENT 
+-------------------
+PREHER Tibo
+Username : preher.tibo
+Groupe : C
+Lien de l'image : img-102.png
+Numéro de l'étudiant : 97
+--> PRESENT 
+-------------------
+RABY Mathilde
+Username : raby.mathilde
+Groupe : C
+Lien de l'image : img-105.png
+Numéro de l'étudiant : 100
+--> PRESENT 
+-------------------
+TAJ Ahmed
+Username : taj.ahmed
+Groupe : C
+Lien de l'image : img-118.png
+Numéro de l'étudiant : 113
+--> ABSENT
+-------------------
+TRAD Yasmeen
+Username : trad.yasmeen
+Groupe : C
+Lien de l'image : img-125.png
+Numéro de l'étudiant : 119
+--> ABSENT
+-------------------
+TUCHAGUES Axel
+Username : tuchagues.axel
+Groupe : C
+Lien de l'image : img-126.png
+Numéro de l'étudiant : 120
+--> ABSENT
+-------------------
+YA Pierre
+Username : ya.pierre
+Groupe : C
+Lien de l'image : img-131.png
+Numéro de l'étudiant : 125
+--> PRESENT 
