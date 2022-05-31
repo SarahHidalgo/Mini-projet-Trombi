@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Etudiant::Etudiant(string nom, string Username, string Prenom, string Groupe_TD, string image, int Numero)
+Etudiant::Etudiant(string nom, string Username, string Prenom, string Groupe_TD, string image, int Numero, bool present)
 {
 	nom_ = nom;
 	username_ = Username;
@@ -13,6 +13,8 @@ Etudiant::Etudiant(string nom, string Username, string Prenom, string Groupe_TD,
 	groupe_TD_ = Groupe_TD;
 	image_ = image;
 	numero_ = Numero;
+	present_ = present;
+
 }
 
 void Etudiant::afficher()
@@ -27,18 +29,20 @@ void Etudiant::afficher()
 
 void Etudiant::sauver(ofstream& ofs) const
 {
+	ofs << "-------------------" << endl;
 	ofs << nom_ << " ";
-	ofs << username_ << " ";
-	ofs << prenom_ << " ";
-	ofs << groupe_TD_ << " ";
-	ofs << image_ << " ";
-	ofs << numero_ << endl;
+	ofs << prenom_ << endl;
+	ofs << "Username : " << username_ << endl;
+	ofs << "Groupe : " << groupe_TD_ << endl;
+	ofs << "Lien de l'image : "<<image_ << endl;
+	ofs << "Numéro de l'étudiant : " << numero_ << endl;
+	if (present_) {
+		ofs << "--> PRESENT " << endl;
+	}
+	else
+	{
+		ofs << "--> ABSENT" << endl;
+	}
 
 
-}
-void Etudiant::charger(ifstream& ifs)
-{
-	getline(ifs, nom_);
-	ifs >> username_ >> prenom_>> groupe_TD_>> image_>> numero_;
-	ifs.ignore(); // On ignore le séparateur \n
 }

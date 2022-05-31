@@ -18,13 +18,6 @@ Groupe_TD::~Groupe_TD()
 		delete tabMembre_[i];
 }
 
-
-// Fonction non nécessaire au final
-void Groupe_TD::ajouterMembre(Etudiant* e)
-{
-	tabMembre_.push_back(e);
-}
-
 void Groupe_TD::afficher()
 {
 	cout << endl;
@@ -63,12 +56,13 @@ void Groupe_TD::ajoutEtudiants(FiseTSE Fise_info)
 
 void Groupe_TD::sauver(ofstream& ofs) const
 {
-	ofs << nom_TD_ << endl;
-	ofs << tabMembre_.size() << endl;
+	ofs << "Groupe : "<< nom_TD_ << endl;
+	ofs << tabMembre_.size() << " élèves " << endl;
 	for (int i = 0; i < (int)tabMembre_.size(); i++)
 		tabMembre_[i]->sauver(ofs);
 }
 
+/*
 void Groupe_TD::charger(ifstream& ifs)
 {
 	getline(ifs, nom_TD_);
@@ -87,3 +81,4 @@ void Groupe_TD::charger(ifstream& ifs)
 		ajouterMembre(e);
 	}
 }
+*/
