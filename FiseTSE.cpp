@@ -107,7 +107,7 @@ void FiseTSE :: choixFise() {
 
 	do {
 
-		cout << "Donnnez la filiere et le groupe de TD dont vous voulez faire l'appel (par exemple FISE2-GrA) : " << endl;
+		cout << "Donnez la filiere et le groupe de TD dont vous voulez faire l'appel (par exemple FISE2-GrA) : " << endl;
 		cin >> choix;
 		stringstream sstream(choix);
 		getline(sstream, Fise, delimiter);
