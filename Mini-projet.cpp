@@ -48,17 +48,13 @@ int main()
 	Groupe_D.ajoutEtudiants(Fise_info);
 	Groupe_E.ajoutEtudiants(Fise_info);
 
-
-	ofstream os("Groupe.txt");
+	// Ouverture d'nu flux pour écrire dans un fichier texte
+	ofstream os("Fiche d'appel.txt");
 
 	Portrait portrait;
-	Fenetre fenetre(lettre_gr);
-
 	// affichage du groupe de TD entrer par l'utilisateur
-	fenetre.afficherFenetreGroupe(os,portrait, lettre_gr, Groupe_A, Groupe_B, Groupe_C, Groupe_D, Groupe_E);
-
-
-	cout << "FIN" << endl;
+	Fenetre fenetre(lettre_gr);
+	fenetre.afficherFenetreGroupe(os, portrait, lettre_gr, Groupe_A, Groupe_B, Groupe_C, Groupe_D, Groupe_E);
 
 	return 0;
 }

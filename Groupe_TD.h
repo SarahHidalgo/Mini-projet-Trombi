@@ -23,7 +23,8 @@ public:
 	void afficher();
 	void ajoutEtudiants(FiseTSE Fise_info); // ajout des etudiants dans le groupe de TD
 	void sauver(ofstream& ofs) const; // sauvegarde des eleves du groupe du TD dans un fichier
-	void setEtudiantsPresence(bool present, int i) { tabMembre_[i]->setPresence(present); }
+	void setEtudiantsPresence(bool present, int i) { tabMembre_[i]->setPresence(present); } // modifie le bool indiquant la presence 
+	// de l'élève d'indice i en bool present
 	string getEtudiantImage(int i) { return tabMembre_[i]->getImage(); } //recup de l'image de l'étudiant d'indice i
 	string getEtudiantNom(int i) { return tabMembre_[i]->getNom(); } //recup du nom de l'étudiant d'indice i
 	string getEtudiantPrenom(int i) { return tabMembre_[i]->getPrenom(); } //recup du prenom de l'étudiant d'indice i

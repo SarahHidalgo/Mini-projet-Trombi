@@ -107,13 +107,13 @@ void FiseTSE :: choixFise() {
 
 	do {
 
-		cout << "Donnez la filiere et le groupe de TD dont vous voulez faire l'appel (par exemple FISE2-GrA) : " << endl;
+		cout << "Donnnez la filiere et le groupe de TD dont vous voulez faire l'appel (par exemple FISE2-GrA) : " << endl;
 		cin >> choix;
 		stringstream sstream(choix);
 		getline(sstream, Fise, delimiter);
-		cout << Fise << endl;
+		// cout << Fise << endl;
 		getline(sstream, Groupe);
-		cout << Groupe << endl;
+		// cout << Groupe << endl;
 		// Si Fise et Groupe font partie de myList(1 ou 2) alors l'utilisateur a rentré ce qui était demandé, on sort donc de la boucle
 		if ((find(begin(myList1), end(myList1), Fise) != end(myList1)) && (find(begin(myList2), end(myList2), Groupe) != end(myList2)))
 		{

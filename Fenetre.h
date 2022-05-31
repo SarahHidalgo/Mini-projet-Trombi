@@ -17,7 +17,7 @@ class Fenetre
 public:
 	Fenetre(string lettre_gr); // constructeur par defaut de la classe Fenetre
 	const string& getNom() const { return nom_fenetre_; };
-	void afficherFenetreGroupe(ofstream& ofs,Portrait portrait, string lettre_groupe, Groupe_TD Groupe_A, Groupe_TD Groupe_B, Groupe_TD Groupe_C, Groupe_TD Groupe_D, Groupe_TD Groupe_E);
+	void afficherFenetreGroupe(ofstream& ofs, Portrait portrait, string lettre_groupe, Groupe_TD Groupe_A, Groupe_TD Groupe_B, Groupe_TD Groupe_C, Groupe_TD Groupe_D, Groupe_TD Groupe_E);
 	//affichage du groupe de TD entrer par l'utilisateur
-	void afficherFenetre(Groupe_TD groupe, Portrait portrait, ofstream& ofs); // aafichage de la fenetre en fonction d'un groupe de TD
+	void afficherFenetre(Groupe_TD groupe, Portrait portrait, ofstream& ofs); // affichage de la fenetre en fonction d'un groupe de TD
 };

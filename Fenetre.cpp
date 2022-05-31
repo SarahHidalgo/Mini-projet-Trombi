@@ -14,7 +14,7 @@ Fenetre::Fenetre(string lettre_gr)
 }
 
 // affichage de la fenetre du groupe entrer par l'utilisateur
-void Fenetre::afficherFenetreGroupe(ofstream& ofs,Portrait portrait, string lettre_groupe, Groupe_TD Groupe_A, Groupe_TD Groupe_B, Groupe_TD Groupe_C, Groupe_TD Groupe_D, Groupe_TD Groupe_E)
+void Fenetre::afficherFenetreGroupe(ofstream& ofs, Portrait portrait,string lettre_groupe, Groupe_TD Groupe_A, Groupe_TD Groupe_B, Groupe_TD Groupe_C, Groupe_TD Groupe_D, Groupe_TD Groupe_E)
 {
 	if (lettre_groupe == Groupe_A.getNom()) {
 		afficherFenetre(Groupe_A, portrait, ofs);
@@ -51,7 +51,7 @@ void Fenetre::afficherFenetre(Groupe_TD groupe, Portrait portrait, ofstream& ofs
 	}
 
 	// Vecteur de string qui stocke l'image present ou absent
-	string nom_pre = "a.png";
+	string nom_pre = "a.png"; // par defaut les élèves sont absents
 	vector <string> etudiants_image; 
 	for (int k = 0; k < groupe.getSize(); k++)
 	{
