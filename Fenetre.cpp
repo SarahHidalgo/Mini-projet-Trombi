@@ -10,11 +10,11 @@ using namespace std;
 
 Fenetre::Fenetre(string lettre_gr)
 {
-	nom_fenetre_ = "Groupe "+ lettre_gr;
+	nom_fenetre_ = "Groupe " + lettre_gr;
 }
 
 // affichage de la fenetre du groupe entrer par l'utilisateur
-void Fenetre::afficherFenetreGroupe(ofstream& ofs,Portrait portrait, string lettre_groupe, Groupe_TD Groupe_A, Groupe_TD Groupe_B, Groupe_TD Groupe_C, Groupe_TD Groupe_D, Groupe_TD Groupe_E)
+void Fenetre::afficherFenetreGroupe(ofstream& ofs, Portrait portrait, string lettre_groupe, Groupe_TD Groupe_A, Groupe_TD Groupe_B, Groupe_TD Groupe_C, Groupe_TD Groupe_D, Groupe_TD Groupe_E)
 {
 	if (lettre_groupe == Groupe_A.getNom()) {
 		afficherFenetre(Groupe_A, portrait, ofs);
@@ -42,6 +42,10 @@ void Fenetre::afficherFenetre(Groupe_TD groupe, Portrait portrait, ofstream& ofs
 	int nb = 0; // on part de l'étudiant 0
 	int num_page = 1; // compteur de page
 	bool der_page = false; // booléen qui détermine si on a atteint la dernière page
+	Portrait portraitFleche;
+
+	bool present = false;
+	string nom_pre = "a.png";
 
 	vector <bool> etudiants_present; // vecteur qui va stocker des booleens pour savoir quel étudiant est absent, et lequel est présent
 	for (int k = 0; k < groupe.getSize(); k++)
@@ -49,16 +53,14 @@ void Fenetre::afficherFenetre(Groupe_TD groupe, Portrait portrait, ofstream& ofs
 		etudiants_present.push_back(false);
 	}
 
-	string nom_pre = "a.png";
-	// Vecteur de string qui stocke l'image present ou absent
-	vector <string> etudiants_image; 
+	vector <string> etudiants_image; // vecteur qui stocke
 	for (int k = 0; k < groupe.getSize(); k++)
 	{
 		etudiants_image.push_back(nom_pre);
 	}
 
 	app.clear(Color::White);
-	
+
 	for (int i = 0; i < 2; i++)
 	{
 		for (int j = 0; j < 6; j++)
@@ -78,10 +80,8 @@ void Fenetre::afficherFenetre(Groupe_TD groupe, Portrait portrait, ofstream& ofs
 			nb++; // on passe à l'étudiant suivant en incrémentant l'entier n
 		}
 	}
-	
 
 	// On place les flèches de navigation que à droite car on est à la première page donc il n'y a rien à gauche
-	Portrait portraitFleche;
 	portraitFleche.SetNom("fleche_droite.png");
 	portraitFleche.afficherImage(app, 1850, 490, true);
 
@@ -203,9 +203,9 @@ void Fenetre::afficherFenetre(Groupe_TD groupe, Portrait portrait, ofstream& ofs
 					}
 					app.display();
 				}
-				
-				
-				
+
+
+				/// Clique sur une image d'étudiant
 				app.clear(Color::White);
 				for (int i = 0; i < 2; i++)
 				{
@@ -217,7 +217,7 @@ void Fenetre::afficherFenetre(Groupe_TD groupe, Portrait portrait, ofstream& ofs
 							if ((localPosition.x >= (150 + j * 270) && localPosition.x <= (390 + j * 270)) && (localPosition.y >= (100 + i * 450) && localPosition.y <= (440 + i * 450)))
 							{
 								// Si l'étudiant était marqué absent
-								if (etudiants_present[6 * i + j + (num_page - 1) * 12] == false) 
+								if (etudiants_present[6 * i + j + (num_page - 1) * 12] == false)
 								{
 									etudiants_present[6 * i + j + (num_page - 1) * 12] = true; // l'étudiant est maintenant marqué présent
 									etudiants_image[6 * i + j + (num_page - 1) * 12] = "p.png"; // on change l'image pour celle de présent
@@ -241,9 +241,12 @@ void Fenetre::afficherFenetre(Groupe_TD groupe, Portrait portrait, ofstream& ofs
 							portrait.afficherImage(app, 150 + j * 270, 100 + i * 450, false);
 
 							// On place les flèches de navigation que à droite car on est à la première page donc il n'y a rien à gauche
-							portraitFleche.SetNom("fleche_droite.png");
-							portraitFleche.afficherImage(app, 1850, 490, true);
-							if (num_page > 0)
+							if (!der_page)
+							{
+								portraitFleche.SetNom("fleche_droite.png");
+								portraitFleche.afficherImage(app, 1850, 490, true);
+							}
+							if (num_page != 1)
 							{
 								portraitFleche.SetNom("fleche_gauche.png");
 								portraitFleche.afficherImage(app, 20, 490, true);
@@ -260,4 +263,3 @@ void Fenetre::afficherFenetre(Groupe_TD groupe, Portrait portrait, ofstream& ofs
 	// Sauvegarde des infos des étudiants dans un fichier txt
 	groupe.sauver(ofs);
 }
-
